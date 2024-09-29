@@ -1,13 +1,91 @@
 {% extends "base.html" %}
 
+{% block title %}Product List{% endblock %}
+
 {% block content %}
-    <h2>Daftar Produk</h2>
-    <div id="product-list">
-        {% for product in products %}
-        <div class="product">
-            <h3>{{ product.name }}</h3>
-            <p>Harga: Rp{{ product.price }}</p>
-        </div>
-        {% endfor %}
+<h1>Product List</h1>
+
+<div class="product-list">
+    {% for product in products %}
+    <div class="product">
+        <img src="{{ url_for('static', filename=product.img) }}" alt="{{ product.name }}">
+        <h2>{{ product.name }}</h2>
+        <p>Price: Rp {{ product.price }}</p>
+        
+        <a href="{{ url_for('routes.product_detail', product_id=product.id) }}" class="view-details">View Details</a>
+        
+        <button onclick="addToCart({{ product.id }}, '{{ product.name }}', {{ product.price }})">Add to Cart</button>
     </div>
+    {% endfor %}
+</div>
+
+<h2>Shopping Cart</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody id="cart-items">
+    </tbody>
+</table>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || {};
+
+function addToCart(id, name, price) {
+    if (cart[id]) {
+        cart[id].quantity += 1;
+    } else {
+        cart[id] = {
+            id: id,
+            name: name,
+            price: price,
+            quantity: 1
+        };
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+}
+
+function updateCart() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    let total = 0;
+
+    for (const id in cart) {
+        const item = cart[id];
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.id}</td>
+            <td>${item.name}</td>
+            <td>Rp ${item.price}</td>
+            <td>${item.quantity}</td>
+            <td>Rp ${itemTotal}</td>
+        `;
+        cartItems.appendChild(row);
+    }
+    
+    const totalRow = document.createElement('tr');
+    totalRow.innerHTML = `
+        <td colspan="4">Total</td>
+        <td>Rp ${total}</td>
+    `;
+    cartItems.appendChild(totalRow);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    localStorage.removeItem('cart'); 
+    cart = {};
+    updateCart();
+});
+</script>
+
 {% endblock %}

@@ -1,19 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}My Flask Shopee{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RV Store{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <header>
+        <h1>RV Store</h1>
+        <nav>
+            <a href="{{ url_for('routes.pages') }}">Home</a>
+            <a href="{{ url_for('routes.search') }}">Search</a>
+            <a href="{{ url_for('routes.add_product') }}">Add Product</a>
+        </nav>
+    </header>
     <div class="container">
-        <header>
-            <h1>Shopee</h1>
-        </header>
-        <main>
-            {% block content %}{% endblock %}
-        </main>
+        {% block content %}{% endblock %}
     </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
