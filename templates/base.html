@@ -3,19 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}RV Store{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}BeliYuk{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>RV Store</h1>
+        <h1>BeliYuk</h1>
         <nav>
-            <a href="{{ url_for('routes.pages') }}">Home</a>
+            <a href="{{ url_for('routes.home') }}">Home</a>
             <a href="{{ url_for('routes.search') }}">Search</a>
-            <a href="{{ url_for('routes.add_product') }}">Add Product</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('routes.dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('routes.logout') }}">Logout</a>
+                <a href="{{ url_for('routes.cart') }}" class="cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">{{ session.get('cart', {})|length }}</span>
+                </a>
+            {% else %}
+                <a href="{{ url_for('routes.login') }}">Login</a>
+                <a href="{{ url_for('routes.register') }}">SignUp</a>
+            {% endif %}
         </nav>
     </header>
     <div class="container">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+<h1>Cari Produk</h1>
+<div class="search-form">
+    <form action="{{ url_for('routes.search') }}" method="get">
+        <div class="inputbutton">
+            <input type="text" name="query" placeholder="Cari produk..." value="{{ request.args.get('query', '') }}">
+            <button type="submit">Cari</button>
+        </div>
+    </form>
+</div>
+
+{% if request.args.get('query') %}
+    <div class="product-list">
+        {% if products %}
+            {% for product in products %}
+            <div class="product">
+                <div class="inproduct">
+                    <img src="{{ url_for('static', filename='uploads/' + product.img) }}" alt="{{ product.name }}">
+                    <h2>{{ product.name }}</h2>
+                    <p>Price: Rp {{ product.price }}</p>
+                    <a href="{{ url_for('routes.product_detail', product_id=product.id) }}" class="view-details">View Details</a>
+                    <div class="btn">
+                        <button class="add-to-cart" data-id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price }}" onclick="alert('Tidak Bisa Di Tambah Ke Keranjang, Harus Login Dulu!')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Produk tidak ditemukan</p>
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}

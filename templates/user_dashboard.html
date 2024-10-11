@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}User Dashboard - {{ current_user.username }}{% endblock %}
+
+{% block content %}
+<div class="user-dashboard">
+    <h2>Welcome, {{ current_user.username }}!</h2>
+    
+    <div class="dashboard-menu">
+        <a href="{{ url_for('routes.home') }}" class="dashboard-btn">Browse Products</a>
+        <a href="{{ url_for('routes.cart') }}" class="dashboard-btn">My Cart</a>
+        <a href="{{ url_for('routes.logout') }}" class="dashboard-btn">Logout</a>
+    </div>
+
+    <div class="dashboard-sections">
+        <div class="dashboard-section user-info">
+            <h3>My Profile</h3>
+            <p><strong>Username:</strong> {{ current_user.username }}</p>
+            <p><strong>Email:</strong> {{ current_user.email }}</p>
+            <a href="#" class="btn btn-secondary">Edit Profile</a>
+        </div>
+
+        <div class="dashboard-section order-history">
+            <h3>Order History</h3>
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>#{{ order.id }}</td>
+                        <td>{{ order.date }}</td>
+                        <td>Rp {{ order.total }}</td>
+                        <td>{{ order.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="dashboard-section wishlist">
+            <h3>My Wishlist</h3>
+            <ul class="wishlist-items">
+                {% for item in wishlist %}
+                <li>{{ item.name }} - Rp {{ item.price }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

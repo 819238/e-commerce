@@ -1,41 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %}Add New Product{% endblock %}
+{% block title %}Admin: Add New Product{% endblock %}
 
 {% block content %}
-<div class="add-product-container">
-    <h1>Add New Product</h1>
-
-    {% if errors %}
-    <div class="alert">
-        <ul>
-            {% for error in errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
-
-    <form action="{{ url_for('routes.add_product') }}" method="post">
+<div class="add-product">
+    <h1>Admin: Add New Product</h1>
+    
+    {% if current_user.is_admin %}
+    {% if session['admin_logged_in'] %}
+    <form action="{{ url_for('routes.add_product') }}" method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="name">Product Name:</label>
-            <input type="text" id="name" name="name" value="{{ request.form.get('name', '') }}" required>
+            <input type="text" placeholder="Product Name" id="name" name="name" required>
         </div>
         <div class="form-group">
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price" value="{{ request.form.get('price', '') }}" required>
+            <input type="number" placeholder="Price" id="price" name="price" step="0.01" required>
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="4">{{ request.form.get('description', '') }}</textarea>
+            <textarea id="description" placeholder="Description" name="description" rows="4" required></textarea>
         </div>
         <div class="form-group">
-            <label for="specification1">Specification:</label>
-            <input type="text" id="specification" name="specification" value="{{ request.form.get('specification', '') }}">
+            <label for="img">Product Image:</label><br>
+            <input type="file" id="img" name="img" accept="image/*" required>
         </div>
         <button type="submit">Add Product</button>
     </form>
-
-    <a href="{{ url_for('routes.pages') }}">Back to Product List</a>
+    {% else %}
+        <p>You must be logged in as an admin to add products. <a href="{{ url_for('routes.admin_login') }}">Login as Admin</a></p>
+    {% endif %}
 </div>
 {% endblock %}

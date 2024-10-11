@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="box-content">
+    <div class="box-login">
+        <div class="title">
+            <h1>Login</h1>
+        </div>
+        <form method="POST">
+            <input type="text" placeholder="Username" id="username" name="username" required>
+            <input type="password" placeholder="Password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div class="footer">
+            <p>Tidak Punya Akun? <a href="{{ url_for('routes.register') }}">Sign Up</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

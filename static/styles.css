@@ -1,0 +1,307 @@
+/* Gaya Umum */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* header */
+
+header {
+    background: linear-gradient(190deg, rgb(102, 102, 223), rgb(3, 2, 3));
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    padding-inline: 20px;
+    padding-block: 12px;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5em;
+    padding-block: 10px;
+}
+
+nav {
+    display: flex;
+    gap: 22px;
+    margin-inline: 440px;
+    width: 100%;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    text-decoration: none;
+}
+
+nav a::after {
+    content: '';
+    height: 3px;
+    background-color: #4518c2;
+    width: 0;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* search */
+
+.search-form {
+    display: flex;
+    justify-content: center;
+}
+
+.search-form .inputbutton,
+input {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    
+}
+
+.search-form input {
+    width: 400px;
+    border: 1px solid black;
+}
+
+.product-detail {
+    margin-block: 20px;
+}
+
+/* Gaya untuk Daftar Produk */
+
+.product,
+.product-detail {
+    background: linear-gradient(190deg, rgb(102, 102, 223), rgb(23, 131, 71));
+    border-radius: 20px;
+    padding-block: 40px;
+    padding-inline: 50px;
+    margin-inline: 5px;
+    text-align: center;
+    box-shadow: 0 6px 1px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    display: inline-flex;
+    margin-block: 10px;
+}
+
+.product-detail-list {
+    margin-inline: 10px;
+    border: 2px solid black;
+}
+
+.product:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 1px rgba(0, 0, 0, 0.5);
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.product img:hover {
+    transform: scale(1.05);
+}
+
+.product h2 {
+    font-size: 1.3em;
+    margin: 15px 0 10px;
+    color: #333;
+}
+
+.product p {
+    font-size: 1.15em;
+    color: #000000;
+    font-weight: bold;
+}
+
+/* Link View Details */
+.view-details {
+    margin: 10px 0;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.view-details:hover {
+    text-decoration: underline;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .product {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .search-form input[type="text"] {
+        width: calc(100% - 120px);
+    }
+
+    .search-form button {
+        width: 100px;
+    }
+}
+
+/* Gaya untuk Halaman Add Product */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-block: 10px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #2226ff;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    align-self: center;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #333;
+}
+
+ul a {
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* Gaya untuk Halaman Detail Produk */
+.product-gallery {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    flex: 1 1 calc(33% - 15px); /* Tiga gambar per baris dengan jarak antar gambar */
+    object-fit: cover;
+}
+
+
+/* Gaya untuk Halaman Login */
+
+.box-login {
+    /* background: white; */
+    box-shadow: 0 12px 110px rgba(7, 132, 170, 0.6);
+    border-radius: 40px;
+    padding: 30px 40px;
+    width: 300px;
+    text-align: center;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    margin-left: 500px;
+    margin-top: 100px;
+}
+
+/* Judul */
+.box-login .title h1 {
+    margin: 0 0 20px;
+    color: #222;
+}
+
+/* Form Input */
+.box-login input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px -10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.box-login input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Tombol Login */
+.box-login button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.box-login button:hover {
+    background-color: #0056b3;
+}
+
+/* Tautan Registrasi */
+.footer p {
+    margin-top: 20px;
+    color: #666;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
